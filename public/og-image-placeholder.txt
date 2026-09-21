@@ -1,0 +1,13 @@
+# Open Graph Image Placeholder
+
+This file is a placeholder for the Open Graph image (og-image.png).
+
+To create a proper Open Graph image for production:
+
+1. Create a 1200x630px image
+2. Use the Impullssee branding (dark background #0b0f19, lime accent #a3e635)
+3. Include your name "Emil Sargsyan" and title "Frontend & Web Developer"
+4. Save as og-image.png in the public/ folder
+5. Delete this placeholder file
+
+For development, the current favicon.svg is being used as a fallback.
