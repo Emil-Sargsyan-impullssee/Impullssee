@@ -1,8 +1,138 @@
-import { useState, useEffect, forwardRef } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import { FiMail, FiMapPin } from 'react-icons/fi';
 import { BsRocket, BsArrowRight } from 'react-icons/bs';
 import { FaTelegramPlane } from 'react-icons/fa';
 import { apiRequest } from '../admin/api';
+
+const PROJECT_TYPES = [
+  'Landing Page',
+  'Business Website',
+  'Web Application',
+  'E-commerce',
+  'React Application',
+  'Full-Stack Project',
+  'Other'
+];
+
+function ProjectTypeDropdown({ value, onChange }) {
+  const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(Math.max(PROJECT_TYPES.indexOf(value), 0));
+  const [opensAbove, setOpensAbove] = useState(false);
+  const rootRef = useRef(null);
+  const triggerRef = useRef(null);
+  const optionRefs = useRef([]);
+  const selectedIndex = Math.max(PROJECT_TYPES.indexOf(value), 0);
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const closeOnOutsideClick = (event) => {
+      if (!rootRef.current?.contains(event.target)) setOpen(false);
+    };
+    document.addEventListener('pointerdown', closeOnOutsideClick);
+    return () => document.removeEventListener('pointerdown', closeOnOutsideClick);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const trigger = triggerRef.current;
+    if (!trigger) return;
+
+    const rect = trigger.getBoundingClientRect();
+    const menuHeight = Math.min(240, window.innerHeight * 0.36);
+    setOpensAbove(window.innerHeight - rect.bottom < menuHeight + 12 && rect.top > window.innerHeight - rect.bottom);
+    optionRefs.current[activeIndex]?.focus();
+  }, [open, activeIndex]);
+
+  const openMenu = (index = selectedIndex) => {
+    setActiveIndex(index);
+    setOpen(true);
+  };
+
+  const selectOption = (option) => {
+    onChange(option);
+    setOpen(false);
+    triggerRef.current?.focus();
+  };
+
+  const handleTriggerKeyDown = (event) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      openMenu(event.key === 'ArrowDown' ? selectedIndex : (selectedIndex - 1 + PROJECT_TYPES.length) % PROJECT_TYPES.length);
+    } else if (event.key === 'Escape' && open) {
+      event.preventDefault();
+      setOpen(false);
+    }
+  };
+
+  const handleOptionKeyDown = (event, index) => {
+    let nextIndex;
+    if (event.key === 'ArrowDown') nextIndex = (index + 1) % PROJECT_TYPES.length;
+    else if (event.key === 'ArrowUp') nextIndex = (index - 1 + PROJECT_TYPES.length) % PROJECT_TYPES.length;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = PROJECT_TYPES.length - 1;
+    else if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      selectOption(PROJECT_TYPES[index]);
+      return;
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      setOpen(false);
+      triggerRef.current?.focus();
+      return;
+    } else if (event.key === 'Tab') {
+      setOpen(false);
+      return;
+    } else return;
+
+    event.preventDefault();
+    setActiveIndex(nextIndex);
+    optionRefs.current[nextIndex]?.focus();
+  };
+
+  return (
+    <div className="project-type-dropdown" ref={rootRef}>
+      <button
+        ref={triggerRef}
+        id="contact-project-type"
+        type="button"
+        className="project-type-trigger"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls="contact-project-type-options"
+        onClick={() => (open ? setOpen(false) : openMenu())}
+        onKeyDown={handleTriggerKeyDown}
+      >
+        <span>{value}</span>
+        <span className={`project-type-chevron${open ? ' is-open' : ''}`} aria-hidden="true" />
+      </button>
+      {open && (
+        <div
+          id="contact-project-type-options"
+          className={`project-type-menu${opensAbove ? ' opens-above' : ''}`}
+          role="listbox"
+          aria-label="Project Type"
+        >
+          {PROJECT_TYPES.map((option, index) => (
+            <div
+              key={option}
+              ref={(element) => { optionRefs.current[index] = element; }}
+              className={`project-type-option${value === option ? ' is-selected' : ''}`}
+              role="option"
+              aria-selected={value === option}
+              tabIndex={activeIndex === index ? 0 : -1}
+              onFocus={() => setActiveIndex(index)}
+              onClick={() => selectOption(option)}
+              onKeyDown={(event) => handleOptionKeyDown(event, index)}
+            >
+              {option}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 const Contact = forwardRef(function Contact({ initialProjectType = 'Landing Page', selectionRevision = 0 }, ref) {
   const [formData, setFormData] = useState({
@@ -185,20 +315,10 @@ const Contact = forwardRef(function Contact({ initialProjectType = 'Landing Page
                   <div className="form-row">
                     <div className="form-group">
                       <label htmlFor="contact-project-type">PROJECT TYPE</label>
-                      <select
-                        id="contact-project-type"
-                        name="projectType"
+                      <ProjectTypeDropdown
                         value={formData.projectType}
-                        onChange={handleChange}
-                      >
-                        <option>Landing Page</option>
-                        <option>Business Website</option>
-                        <option>Web Application</option>
-                        <option>E-commerce</option>
-                        <option>React Application</option>
-                        <option>Full-Stack Project</option>
-                        <option>Other</option>
-                      </select>
+                        onChange={(value) => handleChange({ target: { name: 'projectType', value } })}
+                      />
                     </div>
                     <div className="form-group">
                       <label htmlFor="contact-budget">ESTIMATED BUDGET</label>

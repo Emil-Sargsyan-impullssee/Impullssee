@@ -1,0 +1,104 @@
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #0b0f19;
+  opacity: 1;
+  transition: opacity 440ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.intro-screen--leaving {
+  opacity: 0;
+}
+
+.intro-screen__content {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+.intro-screen--leaving .intro-screen__content {
+  opacity: 0;
+  transform: translateY(-7px);
+}
+
+.intro-screen__wordmark {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #ffffff;
+  font-size: clamp(1.05rem, 4vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: intro-wordmark-enter 620ms cubic-bezier(0.2, 0.75, 0.25, 1) 80ms forwards;
+}
+
+.intro-screen__mark {
+  color: #a3e635;
+  font-size: 0.95em;
+  letter-spacing: -0.08em;
+}
+
+.intro-screen__caption {
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  opacity: 0;
+  animation: intro-caption-enter 440ms ease 260ms forwards;
+}
+
+.intro-screen__accent {
+  width: 34px;
+  height: 2px;
+  margin-top: 3px;
+  border-radius: 2px;
+  background: #a3e635;
+  box-shadow: 0 0 14px rgba(163, 230, 53, 0.3);
+  transform: scaleX(0);
+  animation: intro-accent-enter 420ms cubic-bezier(0.2, 0.75, 0.25, 1) 320ms forwards;
+}
+
+@keyframes intro-wordmark-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes intro-caption-enter {
+  to { opacity: 1; }
+}
+
+@keyframes intro-accent-enter {
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-screen {
+    transition-duration: 100ms;
+  }
+
+  .intro-screen__content,
+  .intro-screen--leaving .intro-screen__content {
+    transition-duration: 100ms;
+    transform: none;
+  }
+
+  .intro-screen__wordmark,
+  .intro-screen__caption,
+  .intro-screen__accent {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

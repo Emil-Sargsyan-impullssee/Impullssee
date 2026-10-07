@@ -269,18 +269,6 @@ function PricingOptions({ onGetStarted }) {
                         {isSelected && <i className="fa-solid fa-check"></i>}
                       </div>
                     </button>
-
-                    {/* GET STARTED BUTTON */}
-                    <button
-                      type="button"
-                      className="service-get-started"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onGetStarted(service.title);
-                      }}
-                    >
-                      Get Started
-                    </button>
                   </div>
                 );
               })}

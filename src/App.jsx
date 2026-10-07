@@ -15,6 +15,7 @@ import { AuthProvider } from './admin/AuthContext';
 import { useAdminAuth } from './admin/auth';
 import AdminLayout from './admin/AdminLayout';
 import { AdminDashboard, AdminLogin, AdminMessages, AdminProjects, AdminServices, AdminSettings } from './admin/AdminPages';
+import IntroAnimation from './components/IntroAnimation';
 import './admin/Admin.css';
 
 // Mapping from pricing service titles to Contact form project types
@@ -151,7 +152,10 @@ function AppRoutes() {
 export default function App() {
   return (
     <Router>
-      <AuthProvider><AppRoutes /></AuthProvider>
+      <AuthProvider>
+        <AppRoutes />
+        <IntroAnimation />
+      </AuthProvider>
     </Router>
   );
 }
