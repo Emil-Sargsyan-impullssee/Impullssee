@@ -1,4 +1,3 @@
-```python
 import logging
 
 from alembic import command
@@ -12,20 +11,12 @@ from app.core.config import get_settings
 from app.core.rate_limiter import limiter
 from app.routers import auth, messages, projects, services
 
+
 settings = get_settings()
 
 app = FastAPI(title="Impullssee Portfolio API", version="1.0.0")
+
 app.state.limiter = limiter
-
-
-@app.on_event("startup")
-def run_database_migrations() -> None:
-    logging.getLogger(__name__).info("Running database migrations...")
-
-    alembic_config = Config("alembic.ini")
-    command.upgrade(alembic_config, "head")
-
-    logging.getLogger(__name__).info("Database migrations completed.")
 
 
 @app.exception_handler(RateLimitExceeded)
@@ -47,15 +38,29 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type"],
 )
 
+
 app.include_router(auth.router)
 app.include_router(messages.router)
 app.include_router(projects.router)
 app.include_router(services.router)
 
 
+@app.on_event("startup")
+def run_database_migrations() -> None:
+    logging.getLogger(__name__).info("Running database migrations...")
+
+    alembic_config = Config("alembic.ini")
+    command.upgrade(alembic_config, "head")
+
+    logging.getLogger(__name__).info("Database migrations completed.")
+
+
 @app.get("/api/health", tags=["health"])
 def health() -> dict[str, str]:
-    return {"status": "ok", "message": "API is running"}
+    return {
+        "status": "ok",
+        "message": "API is running",
+    }
 
 
 @app.exception_handler(Exception)
@@ -67,8 +72,8 @@ async def unexpected_error_handler(
         "Unhandled API error",
         exc_info=exc,
     )
+
     return JSONResponse(
         status_code=500,
         content={"detail": "An unexpected server error occurred"},
     )
-```
