@@ -1,4 +1,4 @@
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 * {
   margin: 0;
@@ -29,6 +29,7 @@
 
 html {
   background-color: var(--bg-primary);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -250,7 +251,7 @@ body {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
-  color: var(--text-primary);
+  color: #fff;
   padding: 7px;
   cursor: pointer;
   align-items: center;
@@ -259,8 +260,8 @@ body {
 }
 
 .nav-toggle-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: #a3e635;
+  color: #a3e635;
 }
 
 .mobile-nav-drawer {
@@ -460,6 +461,7 @@ body {
   font-size: 14px;
   line-height: 1.6;
 }
+
 /* ABOUT SECTION */
 .about-section {
   padding: 80px 0;
@@ -800,6 +802,10 @@ body {
   line-height: 1.4;
 }
 
+.step-copy {
+  min-width: 0;
+}
+
 /* CONTACT SECTION */
 .contact-section {
   padding: 80px 0 20px 0;
@@ -1063,11 +1069,7 @@ body {
   75% { transform: translateX(5px); }
 }
 
-/* SCROLL REVEAL & HTML */
-html {
-  scroll-behavior: smooth;
-}
-
+/* SCROLL REVEAL */
 .reveal-block {
   opacity: 0;
   transform: translateY(120px);
@@ -1079,8 +1081,6 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
-
-
 
 
 /* TELEGRAM */
@@ -1101,7 +1101,7 @@ html {
   pointer-events: none;
 }
 
-/* Թռիչքի գիծը (προαιρετικά) */
+/* Flight line */
 .telegram-flight-line {
   position: absolute;
   top: 50%;
@@ -1150,7 +1150,7 @@ html {
   }
 }
 
-/* Կենտրոնական տեքստի անիմացիա */
+/* Send text animation */
 .telegram-send-text {
   position: relative;
   z-index: 2;
@@ -1182,8 +1182,6 @@ html {
     transform: scale(1.05) translateY(-10px);
   }
 }
-
-
 
 
 /* =========================================================
@@ -1387,6 +1385,25 @@ html {
   }
 }
 
+@media (max-width: 865px) {
+  .navbar {
+    top: 10px;
+    padding: 11px 16px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-btn-desktop {
+    display: none;
+  }
+
+  .nav-toggle-btn {
+    display: flex;
+  }
+}
+
 @media (max-width: 850px) {
   .hero-section {
     grid-template-columns: 1fr;
@@ -1421,42 +1438,13 @@ html {
     width: 100%;
   }
 
+  .step-copy {
+    flex: 1;
+  }
+
   .step-icon-wrapper {
     flex-shrink: 0;
     margin-bottom: 0;
-  }
-}
-
-/* Compact desktop nav so the CTA stays inside the bar at ~769–900px */
-@media (min-width: 769px) and (max-width: 900px) {
-  .nav-links {
-    flex: 1;
-    min-width: 0;
-    gap: 0;
-  }
-
-  .nav-links a {
-    padding: 9px 6px;
-    letter-spacing: 0.2px;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    top: 10px;
-    padding: 11px 16px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .nav-btn-desktop {
-    display: none;
-  }
-
-  .nav-toggle-btn {
-    display: flex;
   }
 
   .hero-content h1 {
@@ -1593,38 +1581,13 @@ html {
 }
 
 @media (max-width: 580px) {
-  .not-found-code {
-    font-size: 80px;
-  }
-
-  .not-found-title {
-    font-size: 24px;
-  }
-
-  .not-found-message {
-    font-size: 14px;
-  }
+  .not-found-code { font-size: 80px; }
+  .not-found-title { font-size: 24px; }
+  .not-found-message { font-size: 14px; }
 }
 
 @media (max-width: 360px) {
-  .not-found-code {
-    font-size: 60px;
-  }
-
-  .not-found-title {
-    font-size: 20px;
-  }
-
-  .not-found-button {
-    padding: 12px 24px;
-    font-size: 13px;
-  }
+  .not-found-code { font-size: 60px; }
+  .not-found-title { font-size: 20px; }
+  .not-found-button { padding: 12px 24px; font-size: 13px; }
 }
-
-
-
-
-
-
-
-

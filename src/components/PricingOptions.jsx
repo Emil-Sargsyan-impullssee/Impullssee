@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Pricing.css";
 
-function PricingOptions() {
+function PricingOptions({ onGetStarted }) {
   const [selectedServices, setSelectedServices] = useState([]);
   const [pageCount, setPageCount] = useState(1);
 
@@ -236,49 +236,52 @@ function PricingOptions() {
                   );
 
                 return (
-                  <button
+                  <div
                     key={service.id}
-                    type="button"
                     className={`service-option ${
                       isSelected ? "selected" : ""
                     }`}
-                    onClick={() =>
-                      toggleService(
-                        service.id
-                      )
-                    }
+                    role="group"
+                    aria-label={service.title}
                   >
-                    {/* ICON */}
-                    <div
-                      className={`service-icon ${service.iconClass}`}
+                    <button
+                      type="button"
+                      className="service-option-select"
+                      aria-pressed={isSelected}
+                      onClick={() => toggleService(service.id)}
                     >
-                      <i
-                        className={`fa-solid ${service.icon}`}
-                      ></i>
-                    </div>
+                      {/* ICON */}
+                      <div className={`service-icon ${service.iconClass}`}>
+                        <i className={`fa-solid ${service.icon}`}></i>
+                      </div>
 
-                    {/* CONTENT */}
-                    <div className="service-content">
-                      <strong>
-                        {service.title}
-                      </strong>
-                      <span>
-                        {service.description}
-                      </span>
-                    </div>
+                      {/* CONTENT */}
+                      <div className="service-content">
+                        <strong>{service.title}</strong>
+                        <span>{service.description}</span>
+                      </div>
 
-                    {/* PRICE */}
-                    <div className="service-price">
-                      +${service.price}
-                    </div>
+                      {/* PRICE */}
+                      <div className="service-price">+${service.price}</div>
 
-                    {/* CHECK */}
-                    <div className="service-check">
-                      {isSelected && (
-                        <i className="fa-solid fa-check"></i>
-                      )}
-                    </div>
-                  </button>
+                      {/* CHECK */}
+                      <div className="service-check">
+                        {isSelected && <i className="fa-solid fa-check"></i>}
+                      </div>
+                    </button>
+
+                    {/* GET STARTED BUTTON */}
+                    <button
+                      type="button"
+                      className="service-get-started"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onGetStarted(service.title);
+                      }}
+                    >
+                      Get Started
+                    </button>
+                  </div>
                 );
               })}
             </div>
@@ -387,6 +390,14 @@ function PricingOptions() {
           <button
             type="button"
             className="summary-button"
+            onClick={() => {
+              if (selectedServiceObjects.length > 0) {
+                const firstSelectedService = selectedServiceObjects[0];
+                onGetStarted(firstSelectedService.title);
+              } else {
+                onGetStarted('Landing Page');
+              }
+            }}
           >
             <span>
               Get Started

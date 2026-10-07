@@ -1,0 +1,7 @@
+# robots.txt for Impullssee Portfolio
+
+User-agent: *
+Allow: /
+
+Sitemap: https://impulse-tan.vercel.app/sitemap.xml
+

@@ -1,4 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Emil Sargsyan - Frontend & Web Developer Portfolio</title>
+  <desc>Open Graph image for Emil Sargsyan's portfolio website showing his name and title as a Frontend & Web Developer</desc>
   <rect width="1200" height="630" fill="#0b0f19"/>
   <text x="60" y="280" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#ffffff">Emil Sargsyan</text>
   <text x="60" y="380" font-family="Arial, sans-serif" font-size="48" fill="#a3e635">Frontend & Web Developer</text>

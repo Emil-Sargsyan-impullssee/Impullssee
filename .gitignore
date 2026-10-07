@@ -17,9 +17,10 @@ dist-ssr
 .env.local
 .env.*.local
 
-# Server
-server/node_modules
-server/.env
+backend/.env
+backend/.venv/
+backend/__pycache__/
+backend/.pytest_cache/
 
 # Editor directories and files
 .vscode/*

@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import { FiMail, FiMapPin } from 'react-icons/fi';
 import { BsRocket, BsArrowRight } from 'react-icons/bs';
 import { FaTelegramPlane } from 'react-icons/fa';
+import { apiRequest } from '../admin/api';
 
-export default function Contact() {
+const Contact = forwardRef(function Contact({ initialProjectType = 'Landing Page', selectionRevision = 0 }, ref) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    projectType: 'Landing Page',
+    projectType: initialProjectType,
     budget: '$500 – $1,000',
     message: ''
   });
@@ -15,6 +16,10 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  // Update projectType when prop changes
+  useEffect(() => {
+    setFormData(prev => ({ ...prev, projectType: initialProjectType }));
+  }, [initialProjectType, selectionRevision]);
 
   const handleChange = (e) => {
     setFormData({
@@ -44,20 +49,10 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/api/contact`, {
+      await apiRequest('/api/messages', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(formData),
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
-      }
 
       // Success
       setSubmitted(true);
@@ -97,7 +92,7 @@ export default function Contact() {
         </div>
       )}
 
-      <section className="contact-section reveal-block" id="contact">
+      <section ref={ref} className="contact-section reveal-block" id="contact">
         <div className="contact-glow-left"></div>
         <div className="contact-glow-right"></div>
 
@@ -256,4 +251,6 @@ export default function Contact() {
       </section>
     </>
   );
-}
+});
+
+export default Contact;
