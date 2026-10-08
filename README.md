@@ -66,7 +66,7 @@ The browser holds the JWT in session storage. Admin API endpoints validate it on
 
 ### Deployment and verification
 
-Deploy the frontend to Vercel and `backend/` to a Python host. Configure backend `DATABASE_URL`, strong `JWT_SECRET_KEY`, `FRONTEND_URL=https://impulse-tan.vercel.app`, then run `alembic upgrade head` as a release step. Keep the database private and use its TLS URL. Both the contact and admin-login limits use in-memory storage, so they are process-local and are suitable for one API process; use a shared gateway limiter for multiple instances.
+Deploy the frontend to Vercel and `backend/` to a Python host. Configure backend `DATABASE_URL`, strong `JWT_SECRET_KEY`, and `FRONTEND_URL=https://impulse-tan.vercel.app`. FastAPI startup applies Alembic migrations before serving requests. To create the first production admin on Render Free, configure `ADMIN_EMAIL` and `ADMIN_PASSWORD` in the Render backend's Environment settings; startup creates the admin once with an Argon2 hash if that email is absent. Use a unique 12–128 character password, remove both variables after the account is created, then log in at `https://impulse-tan.vercel.app/admin`. Keep the database private and use its TLS URL. Both the contact and admin-login limits use in-memory storage, so they are process-local and are suitable for one API process; use a shared gateway limiter for multiple instances.
 
 Run the browser build/lint from the root and the self-contained API workflow checks from `backend/`:
 
