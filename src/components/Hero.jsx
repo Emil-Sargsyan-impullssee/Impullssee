@@ -5,12 +5,12 @@ export default function Hero() {
   return (
     <section className="hero-section" id="home" aria-label="Hero section">
       <div className="hero-content">
-        <span className="hero-subtitle">FRONTEND & FULL STACK DEVELOPER</span>
+        <span className="hero-subtitle">FULL-STACK DEVELOPER</span>
         <h1>
-          I build <span className="highlight">fast, scalable</span> web experiences.
+          Complete web apps, <span className="highlight">from UI to API.</span>
         </h1>
         <p className="hero-desc">
-          Crafting modern web applications with clean code, intuitive design, and seamless performance.
+          I build modern web applications with responsive interfaces, backend APIs, and database-powered features.
         </p>
       </div>
 
@@ -28,9 +28,9 @@ export default function Hero() {
           <pre className="code-content">
             <code>{` 1  const developer = {
  2    name: 'Emil Sargsyan',
- 3    role: 'Frontend Developer',
- 4    focus: 'Performance & UX',
- 5    build: 'Scalable Web Apps'
+ 3    role: 'Full-Stack Developer',
+ 4    focus: 'Frontend, APIs & Databases',
+ 5    build: 'Complete Web Applications'
  6  };
  7  
  8  export default developer;`}</code>

@@ -37,7 +37,7 @@ export default function IntroAnimation() {
           <span className="intro-screen__mark">&lt;/&gt;</span>
           <span>IMPULLSSEE</span>
         </div>
-        <span className="intro-screen__caption">FRONTEND &amp; WEB DEVELOPER</span>
+        <span className="intro-screen__caption">FULL-STACK DEVELOPER</span>
         <span className="intro-screen__accent" />
       </div>
     </div>

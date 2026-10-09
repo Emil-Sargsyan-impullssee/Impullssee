@@ -8,7 +8,7 @@ export default function Process() {
       <div className="process-intro">
         <span className="section-tag">// MY PROCESS</span>
         <h2 id="process-heading">A structured approach to every project.</h2>
-        <p>From understanding to deployment, I follow a proven process to deliver results.</p>
+        <p>From understanding your goals to launching a complete web solution, each step stays focused on your needs.</p>
       </div>
 
       <div className="process-steps">
@@ -30,7 +30,7 @@ export default function Process() {
           <div className="step-icon-wrapper pencil" aria-hidden="true"><FiEdit3 /></div>
           <div className="step-copy"><span className="step-num">03</span>
             <h4>BUILD</h4>
-            <p>Clean code, component design, and development.</p></div>
+            <p>Building responsive interfaces, APIs, and connected features.</p></div>
         </div>
 
         <div className="step-item reveal-block">

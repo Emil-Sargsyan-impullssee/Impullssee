@@ -14,21 +14,13 @@ export default function About() {
       <div className="about-grid">
         <div className="about-text">
           <p className="about-bio-lead">
-            Hello! I'm Emil, a passionate Frontend and Web Developer based in Armenia. I specialize in building high-performing, modern websites and applications that deliver exceptional user experiences.
+            Hello! I'm Emil, a Full-Stack Developer based in Armenia. I enjoy building complete web solutions, from clear, responsive interfaces to the backend logic and APIs that power them.
           </p>
           <p className="about-bio-secondary">
-           From clean HTML/CSS markup and responsive Bootstrap layouts to interactive React.js applications, I combine technical precision with creative design.
+           I work across React interfaces and backend services, connecting application features to databases to create practical, cohesive web experiences.
           </p>
           <div className="about-socials">
-            <a
-              href="https://github.com/Emil-Sargsyan-impullssee"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon-btn"
-              aria-label="Visit Emil's GitHub profile"
-            >
-              <FiGithub size={20} />
-            </a>
+
             <a
               href="https://t.me/impullssee"
               target="_blank"
@@ -45,8 +37,8 @@ export default function About() {
           <h3>Quick Facts</h3>
           <ul className="about-facts-list">
             <li><span aria-hidden="true">📍</span> <strong>Location:</strong> Armenia (Available Worldwide)</li>
-            <li><span aria-hidden="true">💻</span> <strong>Specialty:</strong> Frontend &amp; Web Development</li>
-            <li><span aria-hidden="true">⚡</span> <strong>Tech Stack:</strong> React, JavaScript, HTML/CSS, Bootstrap</li>
+            <li><span aria-hidden="true">💻</span> <strong>Specialty:</strong> Full-Stack Web Development</li>
+            <li><span aria-hidden="true">⚡</span> <strong>Tech Stack:</strong> React, FastAPI, PostgreSQL</li>
             <li><span aria-hidden="true">🎓</span> <strong>Status:</strong> College Student &amp; Freelancer</li>
           </ul>
         </div>

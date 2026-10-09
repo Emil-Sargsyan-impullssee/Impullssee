@@ -57,7 +57,7 @@ function PricingOptions({ onGetStarted }) {
     {
       id: "api",
       title: "API Integration",
-      description: "Connect external services & APIs",
+      description: "Connect application features to APIs and services",
       price: 60,
       icon: "fa-plug",
       iconClass: "js-icon",
