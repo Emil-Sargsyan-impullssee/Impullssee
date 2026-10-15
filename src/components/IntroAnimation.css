@@ -7,7 +7,7 @@
   overflow: hidden;
   background: #0b0f19;
   opacity: 1;
-  transition: opacity 440ms cubic-bezier(0.76, 0, 0.24, 1);
+  transition: opacity 700ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .intro-screen--leaving {
@@ -17,55 +17,115 @@
 .intro-screen__content {
   display: grid;
   justify-items: center;
-  gap: 14px;
+  gap: 24px;
   padding: 24px;
   text-align: center;
-  transition: opacity 320ms ease, transform 320ms ease;
+  transition: opacity 600ms cubic-bezier(0.65, 0, 0.35, 1), transform 600ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .intro-screen--leaving .intro-screen__content {
   opacity: 0;
-  transform: translateY(-7px);
+  transform: translateY(-15px);
+}
+
+.intro-screen__logo-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.85);
+  animation: intro-logo-reveal 1000ms cubic-bezier(0.16, 1, 0.3, 1) 200ms forwards;
+}
+
+.intro-screen__glow-ring {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 1px solid rgba(163, 230, 53, 0.15);
+  opacity: 0;
+  transform: scale(0.8);
+  animation: intro-glow-ring 1200ms cubic-bezier(0.16, 1, 0.3, 1) 300ms forwards;
+}
+
+.intro-screen__glow-ring::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.08) 0%, transparent 70%);
+  opacity: 0;
+  animation: intro-glow-pulse 1500ms ease-in-out 400ms forwards;
+}
+
+.intro-screen__logo {
+  height: clamp(120px, 25vw, 180px);
+  width: auto;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 30px rgba(163, 230, 53, 0.2));
 }
 
 .intro-screen__wordmark {
-  display: flex;
-  align-items: center;
-  gap: 11px;
   color: #ffffff;
-  font-size: clamp(1.05rem, 4vw, 1.45rem);
+  font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 800;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.3em;
   white-space: nowrap;
   opacity: 0;
-  transform: translateY(10px);
-  animation: intro-wordmark-enter 620ms cubic-bezier(0.2, 0.75, 0.25, 1) 80ms forwards;
-}
-
-.intro-screen__mark {
-  color: #a3e635;
-  font-size: 0.95em;
-  letter-spacing: -0.08em;
+  transform: translateY(15px);
+  animation: intro-wordmark-enter 800ms cubic-bezier(0.16, 1, 0.3, 1) 800ms forwards;
 }
 
 .intro-screen__caption {
   color: #64748b;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.25em;
   opacity: 0;
-  animation: intro-caption-enter 440ms ease 260ms forwards;
+  animation: intro-caption-enter 600ms cubic-bezier(0.16, 1, 0.3, 1) 1000ms forwards;
 }
 
 .intro-screen__accent {
-  width: 34px;
+  width: 40px;
   height: 2px;
-  margin-top: 3px;
+  margin-top: 4px;
   border-radius: 2px;
   background: #a3e635;
-  box-shadow: 0 0 14px rgba(163, 230, 53, 0.3);
+  box-shadow: 0 0 20px rgba(163, 230, 53, 0.4);
   transform: scaleX(0);
-  animation: intro-accent-enter 420ms cubic-bezier(0.2, 0.75, 0.25, 1) 320ms forwards;
+  animation: intro-accent-enter 600ms cubic-bezier(0.16, 1, 0.3, 1) 1200ms forwards;
+}
+
+@keyframes intro-logo-reveal {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes intro-glow-ring {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes intro-glow-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
 }
 
 @keyframes intro-wordmark-enter {
@@ -94,11 +154,46 @@
     transform: none;
   }
 
+  .intro-screen__logo-container,
+  .intro-screen__glow-ring,
+  .intro-screen__glow-ring::before,
   .intro-screen__wordmark,
   .intro-screen__caption,
   .intro-screen__accent {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-screen__logo {
+    height: clamp(100px, 22vw, 140px);
+  }
+
+  .intro-screen__glow-ring {
+    inset: -15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-screen__content {
+    gap: 18px;
+  }
+
+  .intro-screen__logo {
+    height: clamp(80px, 20vw, 100px);
+  }
+
+  .intro-screen__glow-ring {
+    inset: -12px;
+  }
+
+  .intro-screen__wordmark {
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  }
+
+  .intro-screen__caption {
+    font-size: 9px;
   }
 }

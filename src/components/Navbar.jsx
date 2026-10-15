@@ -28,7 +28,8 @@ export default function Navbar({ activeSection }) {
     <nav className="navbar" aria-label="Main Navigation">
       <div className="nav-logo">
         <a href="#home" className="logo-link">
-          <span className="logo-tag">&lt;/&gt;</span> Impullssee
+          <img src="/branding/Gemini_Generated_Image_6l646w6l646w6l64-removebg-preview.png" alt="Impullssee Logo" className="logo-image" />
+          <span>Impullssee</span>
         </a>
       </div>
 

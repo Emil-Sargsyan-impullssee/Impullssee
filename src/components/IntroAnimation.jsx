@@ -13,8 +13,8 @@ export default function IntroAnimation() {
     if (!shouldPlay || !visible) return undefined;
 
     const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
-    const leaveDelay = prefersReducedMotion ? 50 : 900;
-    const finishDelay = prefersReducedMotion ? 180 : 1360;
+    const leaveDelay = prefersReducedMotion ? 50 : 2700;
+    const finishDelay = prefersReducedMotion ? 180 : 3400;
     const previousOverflow = document.body.style.overflow;
 
     document.body.style.overflow = 'hidden';
@@ -33,8 +33,11 @@ export default function IntroAnimation() {
   return (
     <div className={`intro-screen${leaving ? ' intro-screen--leaving' : ''}`} aria-hidden="true">
       <div className="intro-screen__content">
+        <div className="intro-screen__logo-container">
+          <div className="intro-screen__glow-ring" />
+          <img src="/branding/Gemini_Generated_Image_6l646w6l646w6l64-removebg-preview.png" alt="Impullssee Logo" className="intro-screen__logo" />
+        </div>
         <div className="intro-screen__wordmark">
-          <span className="intro-screen__mark">&lt;/&gt;</span>
           <span>IMPULLSSEE</span>
         </div>
         <span className="intro-screen__caption">FULL-STACK DEVELOPER</span>

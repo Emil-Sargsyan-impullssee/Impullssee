@@ -99,6 +99,21 @@ body {
   white-space: nowrap;
 }
 
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-image {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .logo-tag {
   color: #a3e635;
 }
@@ -1580,6 +1595,10 @@ body {
   .nav-toggle-btn {
     display: flex;
   }
+
+  .logo-image {
+    height: 28px;
+  }
 }
 
 @media (max-width: 850px) {
@@ -1819,6 +1838,10 @@ body {
 
   .nav-logo {
     font-size: 17px;
+  }
+
+  .logo-image {
+    height: 28px;
   }
 
   .contact-info-card {
